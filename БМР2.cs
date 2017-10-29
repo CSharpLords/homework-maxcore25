@@ -4,29 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp4
+namespace ConsoleApp6
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Здравствуйте! Пожалуйста, введите первое число:");
+            Console.WriteLine("Введите первое целое число:");
             int a = int.Parse(Console.ReadLine());
-            Console.WriteLine("Пожалуйста, введите второе число:");
+            Console.WriteLine("Введите второе целое число:");
             int b = int.Parse(Console.ReadLine());
-            Console.ReadLine(); 
             if (a > b)
             {
-                Console.WriteLine(">");
-            }
-            else if (a < b)
-            {
-                Console.WriteLine("<");
+                comparison(">");
             }
             else if (a == b)
             {
-                Console.WriteLine("=");
+                comparison("=");
             }
+            else if (a < b)
+            {
+                comparison("<");
+            }
+
+        }
+        static void comparison(string sign)
+        {
+            Console.WriteLine(sign);
             Console.ReadLine();
         }
     }
