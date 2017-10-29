@@ -26,13 +26,14 @@ namespace molesInHoles {
 			graphics.FillEllipse(Brushes.Black, 247, 335, 100, 30);
 			
 			// рисуйте кротов здесь
+            DrawMole(40, 75);
+            DrawMole(170, 160);
+            DrawMole(265, 310);
+            DrawMole(270, 20);
 		}
-
-		private void DrawMole() {
+		private void DrawMole(int moleX, int moleY)
+        {
 			// координаты крота
-			int moleX = 200;
-			int moleY = 200;
-
 			// морда
 			graphics.FillEllipse(Brushes.Sienna, moleX, moleY, 60, 60);
 			graphics.FillEllipse(Brushes.BurlyWood, moleX + 14, moleY + 27, 33, 28);
@@ -41,6 +42,7 @@ namespace molesInHoles {
 			graphics.FillEllipse(Brushes.Black, moleX + 35, moleY + 10, 10, 10);
 			// нос
 			graphics.FillEllipse(Brushes.Black, moleX + 25, moleY + 20, 10, 10);
+
 			// рот
 			graphics.FillEllipse(Brushes.Black, moleX + 20, moleY + 38, 20, 5);
 		}
