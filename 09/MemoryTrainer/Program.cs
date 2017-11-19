@@ -5,17 +5,22 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MemoryTrainer {
-	class Program {
-		static void Main(string[] args) {
+namespace MemoryTrainer 
+{
+	class Program 
+    {
+		static void Main(string[] args) 
+        {
 			GuessNumber();
 		}
 
-		static void GuessNumber() {
+		static void GuessNumber() 
+        {
 			Random rand = new Random();
-
-			while (true) {
-				int number = rand.Next(100);
+            int max = 100;
+			while (true) 
+            {
+				int number = rand.Next(max);
 
 				Console.WriteLine("Запомните число: " + number);
 				Thread.Sleep(2000);
@@ -25,11 +30,15 @@ namespace MemoryTrainer {
 				int guess = int.Parse(Console.ReadLine());
 				Console.WriteLine();
 
-				if (guess == number) {
+				if (guess == number) 
+                {
 					Console.WriteLine("Вы угадали!");
+                    max = max + 200;
 				}
-				else {
+				else 
+                {
 					Console.WriteLine("Вы ошиблись ='(");
+                    max = max - 100;
 				}
 				Thread.Sleep(1000);
 				Console.Clear();
