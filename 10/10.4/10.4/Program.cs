@@ -12,18 +12,22 @@ namespace _10._4
         {
             Console.WriteLine("Здравстсвуйте! Пожалуйста, введите грузоподъемность НЛО:");
             int strengthUFO = int.Parse(Console.ReadLine());
-            Console.WriteLine("Пожалуйста, введите массу коров:");
-            int cowMass = int.Parse(Console.ReadLine());
-            if (strengthUFO > cowMass)
+            int cowMass = 0;
+            int cowAmount = 0;
+            int CowsMass = 0;
+            while (true)
             {
-                Console.WriteLine("Отсек для коров заполнен, взлетаем!");
-                double cowAmount = strengthUFO / cowMass;
-                Console.WriteLine("Количество коров, рзамещенных на борту:" + cowAmount);
+                Console.WriteLine("Пожалуйста, введите массу коровы:");
+                cowMass = int.Parse(Console.ReadLine());
+                CowsMass = CowsMass + cowMass;
+                if (CowsMass >= strengthUFO)
+                {
+                    break;
+                }  
+                cowAmount = cowAmount + 1;
             }
-            else
-            {
-                Console.WriteLine("Слишком большой вес коров, отмена охоты!");
-            }
+            Console.WriteLine("Отсек для коров заполнен, взлетаем!");
+            Console.WriteLine("Количество коров, размещенных на борту:" + cowAmount);
             Console.ReadLine();
         }
     }
