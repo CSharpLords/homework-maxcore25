@@ -12,9 +12,24 @@ namespace _10._5
         {
             Console.WriteLine("Здравствуйте! Пожалуйста, введите число:");
             double number = double.Parse(Console.ReadLine());
-            while ()
+            
+            while (true)
             {
-                double powerOf3 = number / 3;
+                if (number > 1)
+                {
+                    number = number / 3;
+                }
+                else if (number == 1)
+                {
+                    Console.WriteLine("Данное число является степенью числа 3.");
+                    break;
+                }
+                else if (number < 1)
+                {
+                    Console.WriteLine("Данное число не является степенью числа 3.");
+                    break;
+                }
+                
             }
             Console.ReadLine();
         }
