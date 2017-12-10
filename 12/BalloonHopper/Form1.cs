@@ -19,10 +19,14 @@ namespace LoopyLandscape {
 			graphics = e.Graphics;
 			graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-			// шар
-			graphics.FillEllipse(Brushes.Violet, 30, 50, 46, 66); // первая пара чисел - координаты, вторая - ширина и высота
-			// нитка
-			graphics.DrawLine(Pens.BlueViolet, 53, 116, 210, 300); // первая пара чисел - координаты начала отрезка, вторая - координаты конца
+
+            for (int balloon = 30; balloon <= 330; balloon = balloon + 60)
+            {
+                graphics.FillEllipse(Brushes.Violet, balloon, 50, 46, 66);
+            }
+
+            for (int thread = 53; thread <= 353; thread = thread + 60)
+                graphics.DrawLine(Pens.BlueViolet, thread, 116, 210, 300); 
 
 			// бобр
 			DrawHopper(208, 240);
