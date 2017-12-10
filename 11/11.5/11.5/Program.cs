@@ -17,15 +17,17 @@ namespace _11._5
             {
                  if(word[je] == 'ж')
                 {
-                    haveJe++;
-                    Console.WriteLine("В слове " + word + " есть буква 'Ж'.");
-                    break;
+                    haveJe = haveJe + 1;
                 }
             }
-                if (haveJe == 0)
-                {
-                    Console.WriteLine("В слове " + word + " буква 'Ж' не найдена.");
-                }
+            if (haveJe >= 1)
+            {
+                Console.WriteLine("В слове " + word + " есть буква 'Ж'. Количество буквы 'Ж': " + haveJe);
+            }
+            if (haveJe == 0)
+            {
+                Console.WriteLine("В слове " + word + " буква 'Ж' не найдена. Количество буквы 'Ж': " + haveJe);
+            }
             Console.ReadLine();
         }
     }
