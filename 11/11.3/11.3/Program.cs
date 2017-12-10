@@ -10,25 +10,24 @@ namespace _11._3
     {
         static void Main(string[] args)
         {
-            
-            
-            int amountOfTallBoyar = 0;
-            for (int amountOfBoyar = 0; amountOfBoyar < 3; amountOfBoyar++) 
+
+
+            int TallBoyar = 0;
+            for (int amountOfBoyar = 0; amountOfBoyar < 20; amountOfBoyar++)
             {
                 Console.WriteLine("Пожалуйста,введите рост боярина: ");
                 int boyarGrowth = int.Parse(Console.ReadLine());
-                amountOfBoyar++;
-                
+                if (boyarGrowth >= 160)
+                {
+                    TallBoyar = TallBoyar + 1;
+                }
             }
 
-            if (amountOfTallBoyar >= 160)
-            {
-                amountOfTallBoyar = amountOfTallBoyar + 1;
-            }
+           
 
-            Console.WriteLine("Котличество тех бояр, которые должны подвергнуться наказанию: " + amountOfTallBoyar);
-            
-            
+            Console.WriteLine("Котличество тех бояр, которые должны подвергнуться наказанию: " + TallBoyar);
+
+
             Console.ReadLine();
         }
     }
