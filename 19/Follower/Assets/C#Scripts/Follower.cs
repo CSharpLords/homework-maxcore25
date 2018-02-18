@@ -17,10 +17,9 @@ public class Follower : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		time = 0 + Time.deltaTime;
-		transform.Translate(Vector3.left * Time.deltaTime);
-
 		Vector3 direction  = target.position - follower.position;
 		direction.Normalize();
+		time = 0 + Time.deltaTime;
+		transform.Translate(direction * Time.deltaTime);
 	}
 }
