@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotate : MonoBehaviour {
-
+public class Red : MonoBehaviour 
+{
+	
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+		 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		transform.Rotate(new Vector3(0, 6, 0) * Time.deltaTime);
+	void Update () 
+	{
+		
+
 	}
+
 }
