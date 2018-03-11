@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Red : MonoBehaviour 
+public class Green : MonoBehaviour 
 {
 	public Renderer car;
 	// Use this for initialization
 	void Start () 
 	{
-		Button redButton = GetComponent<Button> ();
-		redButton.onClick.AddListener (ChangeRed);
+		Button greenButton = GetComponent<Button>();
+		greenButton.onClick.AddListener (ChangeGreen);
 	}
 	
 	// Update is called once per frame
-	void Update () 
-	{
+	void Update () {
 		
-
 	}
-	void ChangeRed()
+	void ChangeGreen()
 	{
-		car.material.color = Color.red;
+		car.material.color = Color.green;
 	}
-
 }
