@@ -24,6 +24,6 @@ public class Click : MonoBehaviour
 	void Increase()
 	{
 		score = score + 1;
-		scoreField = score.ToString ();
+		scoreField.text = score.ToString ();
 	}
 }
