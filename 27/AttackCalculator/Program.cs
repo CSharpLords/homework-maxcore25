@@ -1,8 +1,11 @@
 ﻿using System;
 
-namespace AttackCalculator {
-	class Program {
-		static void Main(string[] args) {
+namespace AttackCalculator 
+{
+	class Program 
+    {
+		static void Main(string[] args) 
+        {
 			double attack1 = GetReducedAttack(50, 100, 20); // 10
 			double attack2 = GetReducedAttack(20, 80, 60);  // 15
 			Console.WriteLine("Сила атаки монстра 1: " + attack1);
@@ -11,7 +14,11 @@ namespace AttackCalculator {
 			Console.ReadLine();
 		}
 
-		static double GetReducedAttack(double health, double maxHealth, double maxAttack) {
+		static double GetReducedAttack(double health, double maxHealth, double maxAttack) 
+        {
+            double healthProportion = maxHealth / health;
+            double attackProportion = maxAttack / healthProportion;
+            return attackProportion;
 		}
 	}
 }
