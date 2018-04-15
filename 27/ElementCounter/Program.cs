@@ -11,5 +11,23 @@ namespace ElementCounter {
 
 			Console.ReadLine();
 		}
+        static int GetElementCount(int[] integers, int exactNumber)
+        {
+            int amountOfEN = 0;
+            for (int i = 0; i < integers.Length; i++)
+            {
+                if(integers[i] == 2)
+                {
+                    amountOfEN += 1;
+                }
+                else if (integers[i] == -3)
+                {
+                    amountOfEN += 1;
+                }
+               
+            }
+
+            return amountOfEN;
+        }
 	}
 }
