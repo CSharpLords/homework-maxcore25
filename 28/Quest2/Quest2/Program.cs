@@ -8,14 +8,18 @@ namespace Quest2
 {
     class Program
     {
-        static int HP = 10;
-        static int DMG = 10;
+        static double HP = 50;
+        static double DMG = 10;
         static bool haveHorse = true;
-        static int money = 0;
+        static double money = 0;
         static bool haveSword = false;
         static bool haveArmour = false;
-        static int robbersDMG = 80;
-        static int robbersHP = 110;
+        static double robbersDMG = 80;
+        static double robbersHP = 110;
+        static double maxRobbersHP = 110;
+        static double giantDMG = 100;
+        static double giantHP = 200;
+        static double maxGiantHP = 220;
         static void Main(string[] args)
         {
             Console.WriteLine("У героя нет ничего, кроме верного коня. Даже меча, и того нет! Но он мечтает о подвигах. После долгих дней странствий наткнулся он на заброшенную деревушку. Злобный Великан повадился от скуки крушить и ломать дома крестьян, красть скот, вытаптывать поля.");
@@ -49,7 +53,7 @@ namespace Quest2
             Console.WriteLine("4.Прослушать историю");
             Console.WriteLine("5.Купить аптечку");
             int answer = int.Parse(Console.ReadLine());
-            if(answer == 1)
+            if (answer == 1)
             {
                 ChooseLocation();
             }
@@ -58,7 +62,7 @@ namespace Quest2
                 if (haveHorse == true)
                 {
                     haveHorse = false;
-                    money += 100;
+                    money = 100;
                     Console.WriteLine("Держи, дарогой, дэньги! А конь-то харощий!");
                     Console.WriteLine("Баланс: " + money);
                     Shop();
@@ -71,7 +75,7 @@ namespace Quest2
             }
             else if (answer == 3)
             {
-                BuyItem();   
+                BuyItem();
             }
             else if (answer == 4)
             {
@@ -123,18 +127,30 @@ namespace Quest2
             Console.WriteLine("1.Bыбрать локацию");
             Console.WriteLine("2.Aтаковать разбойников");
             int answer = int.Parse(Console.ReadLine());
-            if(answer == 1)
+            if (answer == 1)
             {
                 ChooseLocation();
             }
-            else if(answer == 2)
+            else if (answer == 2)
             {
-                Fight();
+                FightRobbers();
             }
         }
         static void Village()
         {
-
+            Console.WriteLine("Здесь терроризирует местных жителей великан! Замочи великана и спаси колхозников");
+            Console.WriteLine("Выбери действие:");
+            Console.WriteLine("1.Bыбрать локацию");
+            Console.WriteLine("2.Aтаковать великанa");
+            int answer = int.Parse(Console.ReadLine());
+            if (answer == 1)
+            {
+                ChooseLocation();
+            }
+            else if (answer == 2)
+            {
+                FightGiant();
+            }
         }
         static void BuyItem()
         {
@@ -158,14 +174,14 @@ namespace Quest2
                     Shop();
                 }
             }
-            else if(product == 1)
+            else if (product == 1)
             {
                 if (money >= 60 && haveArmour == false)
                 {
                     money -= 50;
                     haveArmour = true;
                     HP = 100;
-                    Console.WriteLine("Дэржи мэч, дарогой! Руби всэх наздоровье!");
+                    Console.WriteLine("Дэржи браню, дарогой! Зашышайся наздоровье!");
                     Console.WriteLine("Здоровье: " + HP);
                     Console.WriteLine("Баланс:" + money);
                     Shop();
@@ -181,26 +197,170 @@ namespace Quest2
         static void BuyAidKit()
         {
             if (money >= 20)
-                {
-                    money = -20;
-                    HP += 20; 
-                    Console.WriteLine("Дэржи аптэку, дарогой! Может прыгодыца!");
-                    Console.WriteLine("Баланс: " + money);
-                    Shop();
-                }
+            {
+                money -= 20;
+                HP += 20;
+                Console.WriteLine("Дэржи аптэку, дарогой! Может прыгодыца!");
+                Console.WriteLine("Баланс: " + money);
+                Console.WriteLine("Твоё здоровье: " + HP);
+                Shop();
+            }
             else
             {
                 Console.WriteLine("ДЭНЬГИ ДАЙ!!!");
                 Shop();
             }
         }
-        static void Fight()
+        static void FightRobbers()
+        {
+            RobbersAttack();
+            if (robbersHP > 0)
+            {
+                if (HP > 0)
+                {
+                    AskQuestion();
+                    HeroAttack();
+                }
+
+                else if (HP <= 0)
+                {
+                    Console.WriteLine("Тебе кинули в лицо серную кислоту! Ты сдох!");
+                    End();
+                }
+            }
+            else
+            {
+                HP = 180;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Ты втыкаешь меч в шею одному разбойнику, делаешь сальтуху и втыкаешь в кишки другому! Они умерают от потери крови!");
+                Console.WriteLine("Твоё здоровье восстановилось. Прибавилось бонусное здоровье!");
+                Console.WriteLine("Теперь твоё здоровье: " + HP);
+                ChooseLocation();
+            }
+        }
+        static void RobbersAttack()
         {
             Console.WriteLine("Разбойники атакуют!");
             HP -= robbersDMG;
+            robbersDMG = GetReducedAttack(robbersHP, maxRobbersHP, robbersDMG);
             Console.WriteLine("Твоё здоровье:" + HP);
-            Console.WriteLine("");
-            Console.WriteLine("");
+        }
+        static void HeroAttack()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Ты атакуешь!");
+            robbersHP = robbersHP - DMG;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Хп : " + robbersHP);
+        }
+        static void End()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("Выбери желание:");
+            Console.WriteLine("1.Выйти из игры, т.к. я уже задолбался");
+            Console.WriteLine("2.Начать сначала, т.к. это самая лучшая игра");
+            int lastAnswer = int.Parse(Console.ReadLine());
+            if (lastAnswer == 1)
+            {
+                Environment.Exit(0);
+            }
+            else if (lastAnswer == 2)
+            {
+                Reset();
+                Greenfields();
+            }
+        }
+        static void AskQuestion()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Выбери дейтсвие:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("1.Атаковать");
+            Console.WriteLine("2.Убежать в Зелёные поля");
+            int answerQuestion = int.Parse(Console.ReadLine());
+
+            if (answerQuestion == 1)
+            {
+                HeroAttack();
+                FightRobbers();
+            }
+            else if (answerQuestion == 2)
+            {
+                robbersDMG = 80;
+                robbersHP = 110;
+                Greenfields();
+            }
+        }
+        static void Reset()
+        {
+            HP = 10;
+            DMG = 10;
+            haveHorse = true;
+            money = 0;
+            haveSword = false;
+            haveArmour = false;
+            robbersDMG = 80;
+            robbersHP = 110;
+            maxRobbersHP = 110;
+        }
+        static double GetReducedAttack(double health, double maxHealth, double maxAttack)
+        {
+            double healthProportion = maxHealth / health;
+            double attackProportion = maxAttack / healthProportion;
+            return attackProportion;
+        }
+        static void FightGiant()
+        {
+            GiantAttack();
+            if (giantHP > 0)
+            {
+                if (HP > 0)
+                {
+                    AskQuestionFG();
+                    HeroAttack();
+                }
+
+                else if (HP <= 0)
+                {
+                    Console.WriteLine("Тебя растоптали в лепёху! Ты сдох!");
+                    End();
+                }
+            }
+            else
+            {
+
+                
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Ты втыкаешь меч в ногу великана, прыгаешь ему на спину и отрубаешь огромную рожу! Он умерает от потери головы!");
+                
+                End();
+            }
+        }
+        static void GiantAttack()
+        {
+            Console.WriteLine("Великан атакуeт!");
+            HP -= giantDMG;
+            giantDMG = GetReducedAttack(robbersHP, maxRobbersHP, robbersDMG);
+            Console.WriteLine("Твоё здоровье:" + HP);
+        }
+        static void AskQuestionFG()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Выбери дейтсвие:");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("1.Атаковать");
+            Console.WriteLine("2.Убежать в Зелёные поля");
+            int answerQuestion = int.Parse(Console.ReadLine());
+
+            if (answerQuestion == 1)
+            {
+                HeroAttack();
+                FightGiant();
+            }
+            else if (answerQuestion == 2)
+            {
+                Greenfields();
+            }
         }
     }
 }
