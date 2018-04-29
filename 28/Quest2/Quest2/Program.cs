@@ -65,12 +65,10 @@ namespace Quest2
                     money = 100;
                     Console.WriteLine("Держи, дарогой, дэньги! А конь-то харощий!");
                     Console.WriteLine("Баланс: " + money);
-                    Shop();
                 }
                 else
                 {
                     Console.WriteLine("Ты чо, дарогой! Сначала коня, а потом ужэ дэньги! Я тэбе просто так дэньги отдавать нэ буду! Я ж врэдный хач!");
-                    Shop();
                 }
             }
             else if (answer == 3)
@@ -79,13 +77,13 @@ namespace Quest2
             }
             else if (answer == 4)
             {
-                Console.WriteLine("Жиль быль у бабущки сэрэнький козлык! От козлыка осталысь толко ножки да рожки! АХАХАХАХАХА");
-                Shop();
+                SellerStories();
             }
             else if (answer == 5)
             {
                 BuyAidKit();
             }
+            Shop();
         }
         static void FieldGuardian()
         {
@@ -158,7 +156,7 @@ namespace Quest2
             int product = rand.Next(0, 2);
             if (product == 0)
             {
-                if (money >= 50 && haveSword == false)
+                if (money >= 60 && haveSword == false)
                 {
                     money -= 60;
                     haveSword = true;
@@ -166,33 +164,29 @@ namespace Quest2
                     Console.WriteLine("Дэржи мэч, дарогой! Руби всэх наздоровье!");
                     Console.WriteLine("Урон: 100");
                     Console.WriteLine("Баланс:" + money);
-                    Shop();
                 }
                 else
                 {
                     Console.WriteLine("Эу, дарогой! Ты что? У тэбя дэнег савсэм нэту! Пшол к чорту!");
-                    Shop();
                 }
             }
             else if (product == 1)
             {
                 if (money >= 60 && haveArmour == false)
                 {
-                    money -= 50;
+                    money -= 60;
                     haveArmour = true;
                     HP = 100;
                     Console.WriteLine("Дэржи браню, дарогой! Зашышайся наздоровье!");
                     Console.WriteLine("Здоровье: " + HP);
                     Console.WriteLine("Баланс:" + money);
-                    Shop();
                 }
                 else
                 {
                     Console.WriteLine("Эу, дарогой! Ты что? У тэбя дэнег савсэм нэту! Пшол к чорту!");
-                    Shop();
                 }
             }
-
+            Shop();
         }
         static void BuyAidKit()
         {
@@ -340,7 +334,7 @@ namespace Quest2
         {
             Console.WriteLine("Великан атакуeт!");
             HP -= giantDMG;
-            giantDMG = GetReducedAttack(robbersHP, maxRobbersHP, robbersDMG);
+            giantDMG = GetReducedAttack(giantHP, maxGiantHP, giantDMG);
             Console.WriteLine("Твоё здоровье:" + HP);
         }
         static void AskQuestionFG()
@@ -361,6 +355,14 @@ namespace Quest2
             {
                 Greenfields();
             }
+        }
+        static void SellerStories()
+        {
+            string[] stories = {"Жиль быль у бабущки сэрэнький козлык! От козлыка осталысь толко ножки да рожки! АХАХАХАХАХА", "Кароч, родылся я в Мытышах, нэ учился, пинал болты, за дэвушками бегал... Да, было врэмя...Ладно, дарогой, чо дэлать будэшь?", "Кароч, у мэня ест бызнес - мая самая лучшая лавка на свэтэ, но кароч у мэня есть конкурэнты: Махмуд Джан и Дурук Джан. Это два хача, которых я хачу пабить и стырыть у нах шмотки!!! Болшэ мэсти, болшэ золата!!! УАХАХА! Я гэный, шайтан меня подрал!"};
+            Random rand = new Random();
+            int exactStory = rand.Next(0, 3);
+            Console.WriteLine(stories[exactStory]);
+            
         }
     }
 }
