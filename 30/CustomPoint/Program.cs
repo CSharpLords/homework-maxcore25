@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomPoint {
-	class Program {
-		static void Main(string[] args) {
+namespace CustomPoint 
+{
+	class Program 
+    {
+		static void Main(string[] args) 
+        {
 			Point point1 = new Point();
 			point1.x = 2;
 			point1.y = 5;
