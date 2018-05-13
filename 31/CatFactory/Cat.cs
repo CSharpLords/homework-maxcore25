@@ -7,7 +7,7 @@ namespace CatFactory
         public double age;
         public double weight;
         public double strength;
-        private int score = 0;
+        private int score;
 
         public Cat(string name, double age, double weight, double strength)
         {
@@ -19,6 +19,8 @@ namespace CatFactory
 
         public string Fight(Cat enemyCat)
         {
+            score = 0;
+            enemyCat.score = 0;
             if (weight > enemyCat.weight)
             {
                 score++;
@@ -56,5 +58,5 @@ namespace CatFactory
                 return name;
             }
         }
-      }
+    }
  }
