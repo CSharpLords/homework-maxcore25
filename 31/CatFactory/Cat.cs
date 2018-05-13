@@ -1,4 +1,5 @@
-﻿namespace CatFactory
+﻿using System;
+namespace CatFactory
 {
     class Cat
     {
@@ -21,43 +22,31 @@
             if (weight > enemyCat.weight)
             {
                 score++;
-                if (age > enemyCat.age)
-                {
-                    score++;
-                    if (strength > enemyCat.strength)
-                    {
-                        score++;
-                    }
-                    else
-                    {
-                        enemyCat.score++;
-                    }
-                }
-                else
-                {
-                    enemyCat.score++;
-                }
             }
-            if (weight < enemyCat.weight)
-            {
+            else
+	        {       
                 enemyCat.score++;
-                if (age < enemyCat.age)
-                {
-                    enemyCat.score++;
-                    if (strength < enemyCat.strength)
-                    {
-                        enemyCat.score++;
-                    }
-                    else
-                    {
-                        score++;
-                    }
-                }
-                else
-                {
-                    score++;
-                }
+	        }
+            if (this.age > enemyCat.age)
+            {
+                score++;
             }
+            else
+	        {       
+                enemyCat.score++;
+	        }
+            if (this.strength > enemyCat.strength)
+            {
+                score++;
+            }
+            else
+	        {       
+                enemyCat.score++;
+	        }
+
+        
+            Console.WriteLine("Cat: " + score);
+            Console.WriteLine("Enemy cat: " + enemyCat.score);
             if (score < enemyCat.score)
             {
                 return enemyCat.name;
@@ -66,7 +55,6 @@
             {
                 return name;
             }
-
         }
-    }
-}
+      }
+ }
