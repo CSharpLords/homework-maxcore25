@@ -41,7 +41,17 @@ namespace PhraseGenerator
 
         private void AddNounButton_Click(object sender, RoutedEventArgs e)
         {
+            NounsList.Items.Add(NounTextBox.Text);
+        }
 
+        private void AddAdverbButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdverbsList.Items.Add(AdverbTextBox.Text);
+        }
+
+        private void AddVerbButton_Click(object sender, RoutedEventArgs e)
+        {
+            VerbsList.Items.Add(VerbTextBox.Text);
         }
     }
 }

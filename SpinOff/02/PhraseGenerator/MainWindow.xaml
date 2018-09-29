@@ -31,9 +31,9 @@
         <TextBox x:Name="NounTextBox" HorizontalAlignment="Left" Height="36" Margin="25,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="20"/>
         <Button x:Name="AddNounButton" Content="Add" HorizontalAlignment="Left" Margin="25,251,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22" Click="AddNounButton_Click"/>
         <TextBox x:Name="AdverbTextBox" HorizontalAlignment="Left" Height="36" Margin="300,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="20"/>
-        <Button x:Name="AddAdverbButton" Content="Add" HorizontalAlignment="Left" Margin="300,251,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22"/>
+        <Button x:Name="AddAdverbButton" Content="Add" HorizontalAlignment="Left" Margin="300,251,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22" Click="AddAdverbButton_Click"/>
         <TextBox x:Name="VerbTextBox" HorizontalAlignment="Left" Height="36" Margin="576,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="20"/>
-        <Button x:Name="AddVerbButton" Content="Add" HorizontalAlignment="Left" Margin="576,255,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22"/>
+        <Button x:Name="AddVerbButton" Content="Add" HorizontalAlignment="Left" Margin="576,255,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22" Click="AddVerbButton_Click"/>
 
     </Grid>
 </Window>
