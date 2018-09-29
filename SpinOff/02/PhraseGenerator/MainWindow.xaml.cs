@@ -38,5 +38,10 @@ namespace PhraseGenerator
         {
             Application.Current.Shutdown();
         }
+
+        private void AddNounButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

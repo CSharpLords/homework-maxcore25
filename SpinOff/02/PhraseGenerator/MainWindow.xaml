@@ -26,8 +26,14 @@
             <ListBoxItem Content="сальтанула"/>
         </ListBox>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="680,375,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.535,1.109" Height="24" FontSize="14" Click="ExitButton_Click"/>
-        <Button x:Name="GenerateButton" Content="Generate!" HorizontalAlignment="Left" Margin="25,286,0,0" VerticalAlignment="Top" Width="180" Height="61" FontSize="22" Click="GenerateButton_Click"/>
-        <Label x:Name="Text" Content="PRESS THIS FUCKING BUTTON TO GET A FUNNY PHRASE " HorizontalAlignment="Left" Margin="235,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.624,-0.155" Width="521" Height="49" FontSize="20"/>
+        <Button x:Name="GenerateButton" Content="Generate!" HorizontalAlignment="Left" Margin="25,298,0,0" VerticalAlignment="Top" Width="180" Height="61" FontSize="22" Click="GenerateButton_Click"/>
+        <Label x:Name="Text" Content="PRESS THIS FUCKING BUTTON TO GET A FUNNY PHRASE " HorizontalAlignment="Left" Margin="235,310,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.624,-0.155" Width="521" Height="49" FontSize="20"/>
+        <TextBox x:Name="NounTextBox" HorizontalAlignment="Left" Height="36" Margin="25,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="20"/>
+        <Button x:Name="AddNounButton" Content="Add" HorizontalAlignment="Left" Margin="25,251,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22" Click="AddNounButton_Click"/>
+        <TextBox x:Name="AdverbTextBox" HorizontalAlignment="Left" Height="36" Margin="300,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="20"/>
+        <Button x:Name="AddAdverbButton" Content="Add" HorizontalAlignment="Left" Margin="300,251,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22"/>
+        <TextBox x:Name="VerbTextBox" HorizontalAlignment="Left" Height="36" Margin="576,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="20"/>
+        <Button x:Name="AddVerbButton" Content="Add" HorizontalAlignment="Left" Margin="576,255,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="22"/>
 
     </Grid>
 </Window>
