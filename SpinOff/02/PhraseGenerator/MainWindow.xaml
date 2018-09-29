@@ -1,0 +1,33 @@
+﻿<Window x:Class="PhraseGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhraseGenerator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#FFC0DCE6">
+        <ListBox x:Name="NounsList" HorizontalAlignment="Left" Height="180" Margin="25,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" SelectionChanged="NounsList_SelectionChanged" FontSize="24">
+            <ListBoxItem Content="Пяточка"/>
+            <ListBoxItem Content="Сызрань"/>
+            <ListBoxItem Content="Лохушка"/>
+            <ListBoxItem Content="Подмышка"/>
+        </ListBox>
+        <ListBox x:Name="AdverbsList" HorizontalAlignment="Left" Height="180" Margin="300,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" FontSize="24" SelectionChanged="AdverbsList_SelectionChanged">
+            <ListBoxItem Content="балдёжно"/>
+            <ListBoxItem Content="быстро"/>
+            <ListBoxItem Content="красиво"/>
+            <ListBoxItem Content="чумачече"/>
+        </ListBox>
+        <ListBox x:Name="VerbsList" HorizontalAlignment="Left" Height="180" Margin="576,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" FontSize="24" SelectionChanged="VerbsList_SelectionChanged">
+            <ListBoxItem Content="сдохла"/>
+            <ListBoxItem Content="отлетела"/>
+            <ListBoxItem Content="долбанулась"/>
+            <ListBoxItem Content="сальтанула"/>
+        </ListBox>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="680,375,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.535,1.109" Height="24" FontSize="14" Click="ExitButton_Click"/>
+        <Button x:Name="GenerateButton" Content="Generate!" HorizontalAlignment="Left" Margin="25,286,0,0" VerticalAlignment="Top" Width="180" Height="61" FontSize="22" Click="GenerateButton_Click"/>
+        <Label x:Name="Text" Content="PUSH THE FUCKING BUTTON TO GET A FUNNY PHRASE " HorizontalAlignment="Left" Margin="235,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.624,-0.155" Width="521" Height="49" FontSize="20"/>
+
+    </Grid>
+</Window>
