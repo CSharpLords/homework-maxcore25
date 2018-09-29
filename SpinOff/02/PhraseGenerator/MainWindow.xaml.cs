@@ -31,7 +31,6 @@ namespace PhraseGenerator
 
         private void NounsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
             indexNoun = random.Next(0, NounsList.Items.Count);
         }
 
@@ -47,7 +46,7 @@ namespace PhraseGenerator
 
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            Text.Content = ((ListBoxItem)NounsList.Items[indexNoun]).Content.ToString() + " " + ((ListBoxItem)AdverbsList.Items[indexAdverb]).Content.ToString() + " " + ((ListBoxItem)VerbsList.Items[indexVerb]).Content.ToString();
+            Text.Content = ((ListBoxItem)NounsList.Items[random.Next(0, NounsList.Items.Count)]).Content.ToString() + " " + ((ListBoxItem)AdverbsList.Items[random.Next(0, AdverbsList.Items.Count)]).Content.ToString() + " " + ((ListBoxItem)VerbsList.Items[random.Next(0, AdverbsList.Items.Count)]).Content.ToString();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

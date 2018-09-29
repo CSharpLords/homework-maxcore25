@@ -27,7 +27,7 @@
         </ListBox>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="680,375,0,0" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.535,1.109" Height="24" FontSize="14" Click="ExitButton_Click"/>
         <Button x:Name="GenerateButton" Content="Generate!" HorizontalAlignment="Left" Margin="25,286,0,0" VerticalAlignment="Top" Width="180" Height="61" FontSize="22" Click="GenerateButton_Click"/>
-        <Label x:Name="Text" Content="PUSH THE FUCKING BUTTON TO GET A FUNNY PHRASE " HorizontalAlignment="Left" Margin="235,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.624,-0.155" Width="521" Height="49" FontSize="20"/>
+        <Label x:Name="Text" Content="PRESS THIS FUCKING BUTTON TO GET A FUNNY PHRASE " HorizontalAlignment="Left" Margin="235,298,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.624,-0.155" Width="521" Height="49" FontSize="20"/>
 
     </Grid>
 </Window>
