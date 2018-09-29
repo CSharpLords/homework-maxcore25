@@ -20,6 +20,7 @@ namespace PhraseGenerator
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -41,17 +42,28 @@ namespace PhraseGenerator
 
         private void AddNounButton_Click(object sender, RoutedEventArgs e)
         {
-            NounsList.Items.Add(NounTextBox.Text);
+            ListBoxItem verbItem = new ListBoxItem();
+            verbItem.Content = NounTextBox.Text;
+            NounsList.Items.Add(verbItem);
         }
 
         private void AddAdverbButton_Click(object sender, RoutedEventArgs e)
         {
-            AdverbsList.Items.Add(AdverbTextBox.Text);
+            ListBoxItem adverbItem = new ListBoxItem();
+            adverbItem.Content = AdverbTextBox.Text;
+            AdverbsList.Items.Add(adverbItem);
         }
 
         private void AddVerbButton_Click(object sender, RoutedEventArgs e)
         {
-            VerbsList.Items.Add(VerbTextBox.Text);
+            ListBoxItem verbItem = new ListBoxItem();
+            verbItem.Content = VerbTextBox.Text;
+            VerbsList.Items.Add(verbItem);
+        }
+
+        private void NounsList_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NounsList.SelectedItems.Remove(NounsList.SelectedItems);
         }
     }
 }
