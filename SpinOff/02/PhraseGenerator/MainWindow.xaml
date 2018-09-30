@@ -5,22 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhraseGenerator"
         mc:Ignorable="d"
-        MouseLeftButtonDown="NounsList_MouseLeftButtonDown"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FFC0DCE6">
-        <ListBox x:Name="NounsList" HorizontalAlignment="Left" Height="180" Margin="25,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA"  FontSize="24" >
+        <ListBox x:Name="NounsList" HorizontalAlignment="Left" Height="180" Margin="25,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA"  FontSize="24" SelectionChanged="NounsList_SelectionChanged">
             <ListBoxItem Content="Пяточка"/>
             <ListBoxItem Content="Сызрань"/>
             <ListBoxItem Content="Лохушка"/>
             <ListBoxItem Content="Подмышка"/>
         </ListBox>
-        <ListBox x:Name="AdverbsList" HorizontalAlignment="Left" Height="180" Margin="300,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" FontSize="24" >
+        <ListBox x:Name="AdverbsList" HorizontalAlignment="Left" Height="180" Margin="300,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" FontSize="24" SelectionChanged="AdverbsList_SelectionChanged" >
             <ListBoxItem Content="балдёжно"/>
             <ListBoxItem Content="быстро"/>
             <ListBoxItem Content="красиво"/>
             <ListBoxItem Content="чумачече"/>
         </ListBox>
-        <ListBox x:Name="VerbsList" HorizontalAlignment="Left" Height="180" Margin="576,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" FontSize="24" >
+        <ListBox x:Name="VerbsList" HorizontalAlignment="Left" Height="180" Margin="576,25,0,0" VerticalAlignment="Top" Width="180" Background="#FFFFFDCA" FontSize="24" SelectionChanged="VerbsList_SelectionChanged" >
             <ListBoxItem Content="сдохла"/>
             <ListBoxItem Content="отлетела"/>
             <ListBoxItem Content="долбанулась"/>
