@@ -38,181 +38,225 @@ namespace TicTacToe
 
         private void GameField1_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked1 = true;
+            }
             if (isClicked1 == false)
             {
                 if (player1 == true)
                 {
                     GameField1.Content = "X";
+                    CheckGameField1();
                     player1 = false;
                 }
                 else
                 {
                     GameField1.Content = "O";
+                    CheckGameField1();
                     player1 = true;
                 }
             }
             isClicked1 = true;
-            CheckGameField1();
         }
 
         private void GameField2_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked2 = true;
+            }
             if (isClicked2 == false)
             {
                 if (player1 == true)
                 {
                     GameField2.Content = "X";
+                    CheckGameField2();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField2.Content = "O";
+                    CheckGameField2();
                     player1 = true;
                 }
             }
             isClicked2 = true;
-            CheckGameField2();
         }
 
         private void GameField3_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked3 = true;
+            }
             if (isClicked3 == false)
             {
                 if (player1 == true)
                 {
                     GameField3.Content = "X";
+                    CheckGameField3();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField3.Content = "O";
+                    CheckGameField3();
                     player1 = true;
                 }
             }
             isClicked3 = true;
-            CheckGameField3();
         }
 
         private void GameField4_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked4 = true;
+            }
             if (isClicked4 == false)
             {
                 if (player1 == true)
                 {
                     GameField4.Content = "X";
+                    CheckGameField4();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField4.Content = "O";
+                    CheckGameField4();
                     player1 = true;
                 }
             }
             isClicked4 = true;
-            CheckGameField4();
         }
 
         private void GameField5_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked5 = true;
+            }
             if (isClicked5 == false)
             {
                 if (player1 == true)
                 {
                     GameField5.Content = "X";
+                    CheckGameField5();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField5.Content = "O";
+                    CheckGameField5();
                     player1 = true;
                 }
             }
             isClicked5 = true;
-            CheckGameField5();
         }
 
         private void GameField6_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked6 = true;
+            }
             if (isClicked6 == false)
             {
                 if (player1 == true)
                 {
                     GameField6.Content = "X";
+                    CheckGameField6();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField6.Content = "O";
+                    CheckGameField6();
                     player1 = true;
                 }
             }
-            isClicked6 = true;
-            CheckGameField6();
+            isClicked6 = true;  
         }
 
         private void GameField7_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked7 = true;
+            }
             if (isClicked7 == false)
             {
                 if (player1 == true)
                 {
                     GameField7.Content = "X";
+                    CheckGameField7();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField7.Content = "O";
+                    CheckGameField7();
                     player1 = true;
                 }
             }
             isClicked7 = true;
-            CheckGameField7();
         }
 
         private void GameField8_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked8 = true;
+            }
             if (isClicked8 == false)
             {
                 if (player1 == true)
                 {
                     GameField8.Content = "X";
+                    CheckGameField8();
                     player1 = false;
 
                 }
                 else
                 {
                     GameField8.Content = "O";
+                    CheckGameField8();
                     player1 = true;
                 }
             }
-            isClicked8 = true;
-            CheckGameField8();
+            isClicked8 = true; 
         }
 
         private void GameField9_Click(object sender, RoutedEventArgs e)
         {
+            if ((string)Label.Content != "    TIC-TAC-TOE")
+            {
+                isClicked9 = true;
+            }
             if (isClicked9 == false)
             {
                 if (player1 == true)
                 {
                     GameField9.Content = "X";
+                    CheckGameField9();
                     player1 = false;
-
                 }
                 else
                 {
                     GameField9.Content = "O";
+                    CheckGameField9();
                     player1 = true;
                 }
             }
-            isClicked9 = true;
-            CheckGameField9();
+            isClicked9 = true; 
         }
 
         private void RestartButton_Click(object sender, RoutedEventArgs e)
@@ -239,76 +283,166 @@ namespace TicTacToe
             Label.Content = "    TIC-TAC-TOE";
         }
 
+
         private void CheckGameField1()
         {
-            if ((GameField1.Content == GameField2.Content && GameField1.Content == GameField3.Content) || (GameField1.Content == GameField4.Content && GameField1.Content == GameField7.Content) || (GameField1.Content == GameField5.Content && GameField1.Content == GameField9.Content))
+            if (player1 == true) 
             {
-                WriteWinner();
-            }
-        }
-        private void CheckGameField2()
-        {
-            if ((GameField2.Content == GameField1.Content && GameField2.Content == GameField3.Content) || (GameField2.Content == GameField5.Content && GameField2.Content == GameField8.Content))
-            {
-                WriteWinner();
-            }
-        } // some strange mistakes (always player 2 wins)
-        private void CheckGameField3()
-        {
-            if ((GameField3.Content == GameField2.Content && GameField3.Content == GameField1.Content) || (GameField3.Content == GameField6.Content && GameField3.Content == GameField9.Content) || (GameField3.Content == GameField5.Content && GameField3.Content == GameField7.Content))
-            {
-                WriteWinner();
-            }
-        }
-        private void CheckGameField4()
-        {
-            WriteWinner();
-        }
-        private void CheckGameField5()
-        {
-            if ((GameField5.Content == GameField4.Content && GameField5.Content == GameField6.Content) || (GameField5.Content == GameField2.Content && GameField5.Content == GameField8.Content) || (GameField5.Content == GameField1.Content && GameField5.Content == GameField9.Content) || (GameField5.Content == GameField3.Content && GameField5.Content == GameField7.Content))
-            {
-                WriteWinner();
-            }
-        }
-        private void CheckGameField6()
-        {
-            if ((GameField6.Content == GameField3.Content && GameField6.Content == GameField9.Content) || (GameField6.Content == GameField5.Content && GameField6.Content == GameField4.Content))
-            {
-                WriteWinner();
-            }
-        }
-        private void CheckGameField7()
-        {
-            if ((GameField7.Content == GameField4.Content && GameField7.Content == GameField1.Content) || (GameField7.Content == GameField8.Content && GameField7.Content == GameField9.Content) || (GameField7.Content == GameField5.Content && GameField7.Content == GameField3.Content))
-            {
-                WriteWinner();
-            }
-        }
-        private void CheckGameField8()
-        {
-            if ((GameField8.Content == GameField7.Content && GameField8.Content == GameField9.Content) || (GameField8.Content == GameField5.Content && GameField8.Content == GameField2.Content))
-            {
-                WriteWinner();
-            }
-        }
-        private void CheckGameField9()
-        {
-            if ((GameField9.Content == GameField8.Content && GameField9.Content == GameField7.Content) || (GameField9.Content == GameField6.Content && GameField9.Content == GameField3.Content) || (GameField9.Content == GameField5.Content && GameField9.Content == GameField1.Content))
-            {
-                WriteWinner();
-            }
-        }
-
-        private void WriteWinner()
-        {
-            if (Content == "X")
-            {
-                Label.Content = "Player 1 won";
+                if (((string)GameField1.Content == "X" ) && (GameField1.Content == GameField2.Content && GameField1.Content == GameField3.Content) || (GameField1.Content == GameField4.Content && GameField1.Content == GameField7.Content) || (GameField1.Content == GameField5.Content && GameField1.Content == GameField9.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
             }
             else
             {
-                Label.Content = "Player 2 won";
+                if(((string)GameField1.Content == "O") && (GameField1.Content == GameField2.Content && GameField1.Content == GameField3.Content) || (GameField1.Content == GameField4.Content && GameField1.Content == GameField7.Content) || (GameField1.Content == GameField5.Content && GameField1.Content == GameField9.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField2()
+        {
+            if (player1 == true) 
+            {
+                if (((string)GameField2.Content == "X") && (GameField2.Content == GameField1.Content && GameField2.Content == GameField3.Content) || (GameField2.Content == GameField5.Content && GameField2.Content == GameField8.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField2.Content == "O") && (GameField2.Content == GameField1.Content && GameField2.Content == GameField3.Content) || (GameField2.Content == GameField5.Content && GameField2.Content == GameField8.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        } 
+
+        private void CheckGameField3()
+        {
+            if (player1 == true)
+            {
+                if (((string)GameField3.Content == "X") && (GameField3.Content == GameField2.Content && GameField3.Content == GameField1.Content) || (GameField3.Content == GameField6.Content && GameField3.Content == GameField9.Content) || (GameField3.Content == GameField5.Content && GameField3.Content == GameField7.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField3.Content == "O") && (GameField3.Content == GameField2.Content && GameField3.Content == GameField1.Content) || (GameField3.Content == GameField6.Content && GameField3.Content == GameField9.Content) || (GameField3.Content == GameField5.Content && GameField3.Content == GameField7.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField4()
+        {
+            if (player1 == true)
+            {
+                if (((string)GameField4.Content == "X") && (GameField4.Content == GameField1.Content && GameField4.Content == GameField7.Content) || (GameField4.Content == GameField5.Content && GameField4.Content == GameField6.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField4.Content == "O") && (GameField4.Content == GameField1.Content && GameField4.Content == GameField7.Content) || (GameField4.Content == GameField5.Content && GameField4.Content == GameField6.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField5()
+        {
+            if (player1 == true)
+            {
+                if (((string)GameField5.Content == "X") && (GameField5.Content == GameField4.Content && GameField5.Content == GameField6.Content) || (GameField5.Content == GameField2.Content && GameField5.Content == GameField8.Content) || (GameField5.Content == GameField1.Content && GameField5.Content == GameField9.Content) || (GameField5.Content == GameField3.Content && GameField5.Content == GameField7.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (( (string)GameField5.Content == "O") && (GameField5.Content == GameField4.Content && GameField5.Content == GameField6.Content) || (GameField5.Content == GameField2.Content && GameField5.Content == GameField8.Content) || (GameField5.Content == GameField1.Content && GameField5.Content == GameField9.Content) || (GameField5.Content == GameField3.Content && GameField5.Content == GameField7.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField6()
+        {
+            if (player1 == true)
+            {
+                if (((string)GameField6.Content == "X") && (GameField6.Content == GameField3.Content && GameField6.Content == GameField9.Content) || (GameField6.Content == GameField5.Content && GameField6.Content == GameField4.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField6.Content == "O") && (GameField6.Content == GameField3.Content && GameField6.Content == GameField9.Content) || (GameField6.Content == GameField5.Content && GameField6.Content == GameField4.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField7()
+        {
+            if (player1 == true) 
+            {
+                if (((string)GameField7.Content == "X") && (GameField7.Content == GameField4.Content && GameField7.Content == GameField1.Content) || (GameField7.Content == GameField8.Content && GameField7.Content == GameField9.Content) || (GameField7.Content == GameField5.Content && GameField7.Content == GameField3.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField7.Content == "O") && (GameField7.Content == GameField4.Content && GameField7.Content == GameField1.Content) || (GameField7.Content == GameField8.Content && GameField7.Content == GameField9.Content) || (GameField7.Content == GameField5.Content && GameField7.Content == GameField3.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField8()
+        {
+            if (player1 == true)
+            {
+                if (((string)GameField8.Content == "X") && (GameField8.Content == GameField7.Content && GameField8.Content == GameField9.Content) || (GameField8.Content == GameField5.Content && GameField8.Content == GameField2.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField8.Content == "O") && (GameField8.Content == GameField7.Content && GameField8.Content == GameField9.Content) || (GameField8.Content == GameField5.Content && GameField8.Content == GameField2.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
+            }
+        }
+
+        private void CheckGameField9()
+        {
+            if (player1 == true)
+            {
+                if (((string)GameField9.Content == "X") && (GameField9.Content == GameField8.Content && GameField9.Content == GameField7.Content) || (GameField9.Content == GameField6.Content && GameField9.Content == GameField3.Content) || (GameField9.Content == GameField5.Content && GameField9.Content == GameField1.Content))
+                {
+                    Label.Content = "Player 1 won";
+                }
+            }
+            else
+            {
+                if (((string)GameField9.Content == "O") && (GameField9.Content == GameField8.Content && GameField9.Content == GameField7.Content) || (GameField9.Content == GameField6.Content && GameField9.Content == GameField3.Content) || (GameField9.Content == GameField5.Content && GameField9.Content == GameField1.Content))
+                {
+                    Label.Content = "Player 2 won";
+                }
             }
         }
     }
