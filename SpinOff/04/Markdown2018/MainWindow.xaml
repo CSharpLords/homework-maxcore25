@@ -7,12 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="507" Width="805">
     <Grid>
-        <TextBox x:Name="MarkdownTextBox" HorizontalAlignment="Left" Height="399" Margin="0,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="381" FontSize="18" TextChanged="MarkdownTextBox_TextChanged"/>
-        <ScrollBar x:Name="MarkdownScroll" HorizontalAlignment="Left" Margin="381,68,0,0" VerticalAlignment="Top" Height="399"/>
-        <TextBox x:Name="PreviewTextBox" HorizontalAlignment="Left" Height="399" Margin="398,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" FontSize="18" TextChanged="PreviewTextBox_TextChanged"/>
-        <ScrollBar x:Name="PreviewScroll" HorizontalAlignment="Left" Margin="773,68,0,0" VerticalAlignment="Top" Height="399"/>
+        <TextBox x:Name="MarkdownTextBox" HorizontalAlignment="Left" Height="399" Margin="0,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="381" FontSize="18" TextChanged="MarkdownTextBox_TextChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
         <Label x:Name="MarkdownLabel" Content="Markdown" HorizontalAlignment="Left" Margin="0,37,0,0" VerticalAlignment="Top" Width="93" FontSize="16"/>
         <Label x:Name="PreviewLabel" Content="Preview" HorizontalAlignment="Left" Margin="398,37,0,0" VerticalAlignment="Top" Width="93" FontSize="16"/>
+        <RichTextBox x:Name="PreviewRichTextBox" HorizontalAlignment="Left" Height="398" Margin="398,68,0,0" VerticalAlignment="Top" Width="381" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
     </Grid>
 </Window>
