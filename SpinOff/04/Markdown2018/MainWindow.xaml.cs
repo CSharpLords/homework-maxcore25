@@ -30,9 +30,20 @@ namespace Markdown2018
 
         }
 
-        private void PreviewTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void PreviewRichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            StackPanel stackPanel = new StackPanel();
+            FlowDocument flowDocument = new FlowDocument();
+            Run run = new Run("hello");
+            Bold bold = new Bold(new Run(" world"));
+            Paragraph paragraph = new Paragraph();
+            paragraph.Inlines.Add(run);
+            paragraph.Inlines.Add(bold);
+            flowDocument.Blocks.Add(paragraph);
+            RichTextBox richTextBox = new RichTextBox();
+            richTextBox.Document = flowDocument;
+            stackPanel.Children.Add(richTextBox);
+            this.Content = stackPanel;
         }
     }
 }
