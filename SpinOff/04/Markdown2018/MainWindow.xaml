@@ -11,7 +11,7 @@
                  ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
         <Label x:Name="MarkdownLabel" Content="Markdown" HorizontalAlignment="Left" Margin="0,37,0,0" VerticalAlignment="Top" Width="93" FontSize="16"/>
         <Label x:Name="PreviewLabel" Content="Preview" HorizontalAlignment="Left" Margin="398,37,0,0" VerticalAlignment="Top" Width="93" FontSize="16"/>
-        <RichTextBox x:Name="PreviewRichTextBox" HorizontalAlignment="Left" Height="398" Margin="398,68,0,0" VerticalAlignment="Top" Width="381" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="18" VerticalScrollBarVisibility="Auto" TextChanged="PreviewRichTextBox_TextChanged">
+        <RichTextBox x:Name="PreviewRichTextBox" HorizontalAlignment="Left" Height="398" Margin="398,68,0,0" VerticalAlignment="Top" Width="381" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="18" VerticalScrollBarVisibility="Auto">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
