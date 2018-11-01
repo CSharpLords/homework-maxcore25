@@ -66,7 +66,7 @@ namespace Markdown2018
 
         private void ItalicType()
         {
-            string[] parts = MarkdownTextBox.Text.Split(new[] { "*" }, StringSplitOptions.None);
+            string[] parts = MarkdownTextBox.Text.Split( new[] {"*"} , StringSplitOptions.None);
             int start = 0;
             for (int i = 0; i < parts.Length; i++)
             {
