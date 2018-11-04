@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Markdown2
 {
@@ -25,46 +16,48 @@ namespace Markdown2
             InitializeComponent();
         }
 
-        private int amountForItalic = 0;
-        private int position1 = 0;
-        private int position2 = 0;
+
 
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            int amountOfStars = 0;
+            StringBuilder italicString = new StringBuilder();
 
             FlowDocument flowDocument = new FlowDocument();
             Paragraph paragraph = new Paragraph();
-            Run run = new Run(MarkdownTextBox.Text);
-            paragraph.Inlines.Add(run);
             flowDocument.Blocks.Add(paragraph);
             PreviewRichTextBox.Document = flowDocument;
 
-            string convertToString = MarkdownTextBox.Text;
+            string text = "a*s*кот*s*u";
+            //string text = MarkdownTextBox.Text;
 
-            for (int i = 0; i < MarkdownTextBox.Text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                if (amountForItalic == 1 && MarkdownTextBox.Text[i] == '*')
+                if (amountOfStars == 1 && text[i] == '*')
                 {
-                    amountForItalic = 0;
-
-                    //position2 = MarkdownTextBox.Text.IndexOf('*', i);
-
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.Append(MarkdownTextBox.Text);
-                    stringBuilder.Insert('*', MarkdownTextBox.Text[i]);
-                    convertToString = stringBuilder.ToString();
-
-                    Italic italic = new Italic(new Run(convertToString));
+                    Italic italic = new Italic(new Run(italicString.ToString()));
                     paragraph.Inlines.Add(italic);
-                    break;
-
+                    italicString.Clear();
+                    amountOfStars = 0;
                 }
-                if (MarkdownTextBox.Text[i] == '*')
+                else
                 {
-                    amountForItalic++;
-                    break;
-                    //position1 = MarkdownTextBox.Text.IndexOf('*', i);
+                    if (text[i] == '*')
+                    {
+                        amountOfStars++;
+                    }
+                    else
+                    {
+                        if (amountOfStars == 1)
+                        {
+                            italicString.Append(text[i]);
+                        }
+                        else
+                        {
+                            Run run = new Run(text[i].ToString());
+                            paragraph.Inlines.Add(run);
+                        }
+                    }
                 }
             }
         }
