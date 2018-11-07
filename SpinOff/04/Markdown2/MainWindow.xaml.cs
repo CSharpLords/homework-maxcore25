@@ -32,19 +32,20 @@ namespace Markdown2
             flowDocument.Blocks.Add(paragraph);
             PreviewRichTextBox.Document = flowDocument;
 
-            //string text = "a**кот**u";
-            string text = MarkdownTextBox.Text;
+            string text = "a**кот**u";
+            //string text = MarkdownTextBox.Text;
 
             for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == '*' && text[i + 1] == '*') //must correct this condition
                 {
-                    boldIsActivated = true;
-                    amountOfStars += 2;
                     if (i >= text.Length)
                     {
                         i--;
                     }
+                    boldIsActivated = true;
+                    amountOfStars += 2;
+                    
                     if (boldIsActivated == true && amountOfStars == 4) 
                     {
                         Bold bold = new Bold(new Run(boldString.ToString()));
