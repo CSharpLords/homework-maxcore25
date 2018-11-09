@@ -21,6 +21,7 @@ namespace Markdown2
 
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            bool firstStarInText = false;
             int amountOfStars = 0;
             bool italicIsActivated = false;
             StringBuilder italicString = new StringBuilder();
@@ -32,18 +33,28 @@ namespace Markdown2
             flowDocument.Blocks.Add(paragraph);
             PreviewRichTextBox.Document = flowDocument;
 
-            string text = "a**кот**u";
-            //string text = MarkdownTextBox.Text;
+            //string text = "a**кот**u";
+            string text = MarkdownTextBox.Text;
 
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i] == '*' && text[i + 1] == '*') //must correct this condition
+                if (text[i] == '*' && firstStarInText == false)
                 {
+                    firstStarInText = true;
+                    italicIsActivated = true;
+                }
+                else if (text[i] == '*' && text[i - 1] == '*') 
+                {
+                    if (i < 0)
+                    {
+                        i++;
+                    }
                     if (i >= text.Length)
                     {
                         i--;
                     }
                     boldIsActivated = true;
+                    italicIsActivated = false;
                     amountOfStars += 2;
                     
                     if (boldIsActivated == true && amountOfStars == 4) 
@@ -57,7 +68,7 @@ namespace Markdown2
                 }
                 else
                 {
-                    if (amountOfStars == 1 && text[i] == '*')
+                    if (italicIsActivated == true && text[i] == '*')
                     {
                         Italic italic = new Italic(new Run(italicString.ToString()));
                         paragraph.Inlines.Add(italic);
@@ -67,9 +78,16 @@ namespace Markdown2
                     }
                     else
                     {
-                        if (text[i] == '*')
+                        if (text[i] == '*') 
                         {
-                            italicIsActivated = true;
+                            if (boldIsActivated == true)
+                            {
+                                italicIsActivated = false;
+                            }
+                            else
+                            {
+                                italicIsActivated = true; 
+                            }
                         }
                         else // letters 
                         {
@@ -77,11 +95,11 @@ namespace Markdown2
                             {
                                 italicString.Append(text[i]);
                             }
-                            if (boldIsActivated == true)
+                            else if (boldIsActivated == true)
                             {
                                 boldString.Append(text[i]);
                             }
-                            else
+                            else if(italicIsActivated != true && boldIsActivated != true)
                             {
                                 Run run = new Run(text[i].ToString());
                                 paragraph.Inlines.Add(run);
