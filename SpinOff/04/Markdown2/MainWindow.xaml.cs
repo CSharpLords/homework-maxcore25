@@ -24,9 +24,8 @@ namespace Markdown2
             bool firstStarInText = false;
             int amountOfStars = 0;
             bool italicIsActivated = false;
-            StringBuilder italicString = new StringBuilder();
+            StringBuilder resultString = new StringBuilder();
             bool boldIsActivated = false;
-            StringBuilder boldString = new StringBuilder();
 
             FlowDocument flowDocument = new FlowDocument();
             Paragraph paragraph = new Paragraph();
@@ -59,9 +58,9 @@ namespace Markdown2
                     
                     if (boldIsActivated == true && amountOfStars == 4) 
                     {
-                        Bold bold = new Bold(new Run(boldString.ToString()));
+                        Bold bold = new Bold(new Run(resultString.ToString()));
                         paragraph.Inlines.Add(bold);
-                        boldString.Clear();
+                        resultString.Clear();
                         amountOfStars = 0;
                         boldIsActivated = false;
                     }
@@ -70,9 +69,9 @@ namespace Markdown2
                 {
                     if (italicIsActivated == true && text[i] == '*')
                     {
-                        Italic italic = new Italic(new Run(italicString.ToString()));
+                        Italic italic = new Italic(new Run(resultString.ToString()));
                         paragraph.Inlines.Add(italic);
-                        italicString.Clear();
+                        resultString.Clear();
                         amountOfStars = 0;
                         italicIsActivated = false;
                     }
@@ -93,11 +92,11 @@ namespace Markdown2
                         {
                             if (italicIsActivated == true)
                             {
-                                italicString.Append(text[i]);
+                                resultString.Append(text[i]);
                             }
                             else if (boldIsActivated == true)
                             {
-                                boldString.Append(text[i]);
+                                resultString.Append(text[i]);
                             }
                             else if(italicIsActivated != true && boldIsActivated != true)
                             {
