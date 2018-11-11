@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Security.AccessControl;
 using System.Text;
 using System.Windows;
@@ -17,12 +18,8 @@ namespace Markdown2
             InitializeComponent();
         }
 
-
-
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool firstStarInText = false;
-            int amountOfStars = 0;
             bool italicIsActivated = false;
             StringBuilder resultString = new StringBuilder();
             bool boldIsActivated = false;
@@ -32,76 +29,57 @@ namespace Markdown2
             flowDocument.Blocks.Add(paragraph);
             PreviewRichTextBox.Document = flowDocument;
 
-            //string text = "a**кот**u";
+            //string text = "**кот**u";
             string text = MarkdownTextBox.Text;
 
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i] == '*' && firstStarInText == false)
+                if (boldIsActivated == true && text[i] == '*' && i != 0 && text[i - 1] == '*')
                 {
-                    firstStarInText = true;
-                    italicIsActivated = true;
-                }
-                else if (text[i] == '*' && text[i - 1] == '*') 
-                {
-                    if (i < 0)
-                    {
-                        i++;
-                    }
-                    if (i >= text.Length)
-                    {
-                        i--;
-                    }
-                    boldIsActivated = true;
+                    Bold bold = new Bold(new Run(resultString.ToString()));
+                    paragraph.Inlines.Add(bold);
+                    resultString.Clear();
+                    boldIsActivated = false;
                     italicIsActivated = false;
-                    amountOfStars += 2;
-                    
-                    if (boldIsActivated == true && amountOfStars == 4) 
-                    {
-                        Bold bold = new Bold(new Run(resultString.ToString()));
-                        paragraph.Inlines.Add(bold);
-                        resultString.Clear();
-                        amountOfStars = 0;
-                        boldIsActivated = false;
-                    }
                 }
                 else
                 {
-                    if (italicIsActivated == true && text[i] == '*')
+                    if (text[i] == '*' && i != 0 && text[i - 1] == '*')
                     {
-                        Italic italic = new Italic(new Run(resultString.ToString()));
-                        paragraph.Inlines.Add(italic);
-                        resultString.Clear();
-                        amountOfStars = 0;
+                        boldIsActivated = true;
                         italicIsActivated = false;
                     }
                     else
                     {
-                        if (text[i] == '*') 
+                        if (italicIsActivated == true && text[i] == '*')
                         {
-                            if (boldIsActivated == true)
-                            {
-                                italicIsActivated = false;
-                            }
-                            else
-                            {
-                                italicIsActivated = true; 
-                            }
+                            Italic italic = new Italic(new Run(resultString.ToString()));
+                            paragraph.Inlines.Add(italic);
+                            resultString.Clear();
+                            italicIsActivated = false;
                         }
-                        else // letters 
+                        else
                         {
-                            if (italicIsActivated == true)
+                            if (text[i] == '*')
                             {
-                                resultString.Append(text[i]);
+                                    italicIsActivated = true;
+                                
                             }
-                            else if (boldIsActivated == true)
+                            else // letters 
                             {
-                                resultString.Append(text[i]);
-                            }
-                            else if(italicIsActivated != true && boldIsActivated != true)
-                            {
-                                Run run = new Run(text[i].ToString());
-                                paragraph.Inlines.Add(run);
+                                if (italicIsActivated == true)
+                                {
+                                    resultString.Append(text[i]);
+                                }
+                                else if (boldIsActivated == true)
+                                {
+                                    resultString.Append(text[i]);
+                                }
+                                else
+                                {
+                                    Run run = new Run(text[i].ToString());
+                                    paragraph.Inlines.Add(run);
+                                }
                             }
                         }
                     }
