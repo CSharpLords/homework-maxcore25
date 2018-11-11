@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Markdown2018
 {
@@ -20,7 +10,6 @@ namespace Markdown2018
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Element> elements;
         public MainWindow()
         {
             InitializeComponent();
@@ -29,16 +18,8 @@ namespace Markdown2018
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Paragraph paragraph = new Paragraph();
-            elements = new List<Element>();
 
-            BoldType();
-            ItalicType();
-            UsualType();
-            elements = elements.OrderBy(el => el.position).ToList();
-            foreach (var element in elements)
-            {
-                paragraph.Inlines.Add(element.element);
-            }
+            BoldType(paragraph);
 
             FlowDocument flowDocument = new FlowDocument();
             flowDocument.Blocks.Add(paragraph);
@@ -46,64 +27,40 @@ namespace Markdown2018
             PreviewRichTextBox.Document = flowDocument;
         }
 
-        private void BoldType()
+        private void BoldType(Paragraph paragraph)
         {
             string[] parts = MarkdownTextBox.Text.Split(new[] { "**" }, StringSplitOptions.None);
-            int start = 0;
             for (int i = 0; i < parts.Length; i++)
             {
                 if (i % 2 != 0)
                 {
                     Bold bold = new Bold(new Run(parts[i]));
-                    Element boldType = new Element();
-                    boldType.element = bold;
-                    boldType.position = MarkdownTextBox.Text.IndexOf("**", start);
-                    start = boldType.position + 2 + parts[i].Length + 2;
-                    elements.Add(boldType);
+                    paragraph.Inlines.Add(bold);
+                }
+                else
+                {
+                    string[] splittedParts = parts[i].Split(new[] { "*" }, StringSplitOptions.None);
+                    ItalicType(paragraph, splittedParts);
                 }
             }
         }
 
-        private void ItalicType()
+        private void ItalicType(Paragraph paragraph, string[] parts)
         {
-            string[] parts = MarkdownTextBox.Text.Split( new[] {"*"} , StringSplitOptions.None);
-            int start = 0;
+
             for (int i = 0; i < parts.Length; i++)
             {
                 if (i % 2 != 0)
                 {
                     Italic italic = new Italic(new Run(parts[i]));
-                    Element italicType = new Element();
-                    italicType.element = italic;
-                    italicType.position = MarkdownTextBox.Text.IndexOf("*", start);
-                    start = italicType.position + 2 + parts[i].Length;
-                    elements.Add(italicType);
+                    paragraph.Inlines.Add(italic);
                 }
-            }
-        }
-
-        private void UsualType()
-        {
-            string[] parts = MarkdownTextBox.Text.Split(new[] { "*"}, StringSplitOptions.None);
-            int start = 0;
-            for (int i = 0; i < parts.Length; i++)
-            {
-                if (i % 2 == 0)
+                else
                 {
                     Run run = new Run(parts[i]);
-                    Element usualType = new Element();
-                    usualType.element = run;
-                    usualType.position = MarkdownTextBox.Text.IndexOf("*", start);
-                    start = usualType.position + parts[i].Length;
-                    elements.Add(usualType);
+                    paragraph.Inlines.Add(run);
                 }
             }
         }
-    }
-
-    class Element
-    {
-        public Inline element;
-        public int position;
     }
 }
