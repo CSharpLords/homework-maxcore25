@@ -1,10 +1,10 @@
-﻿
-using System;
-using System.Security.AccessControl;
+﻿using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace Markdown2
 {
@@ -20,9 +20,10 @@ namespace Markdown2
 
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool italicIsActivated = false;
             StringBuilder resultString = new StringBuilder();
+            bool italicIsActivated = false;
             bool boldIsActivated = false;
+            bool quotingIsActivated = false;
 
             FlowDocument flowDocument = new FlowDocument();
             Paragraph paragraph = new Paragraph();
@@ -62,28 +63,72 @@ namespace Markdown2
                         {
                             if (text[i] == '*')
                             {
-                                    italicIsActivated = true;
-                                
+                                italicIsActivated = true;
+
                             }
                             else // letters 
                             {
-                                if (italicIsActivated == true)
+                                if (quotingIsActivated == true && text[i] == '`')
                                 {
-                                    resultString.Append(text[i]);
-                                }
-                                else if (boldIsActivated == true)
-                                {
-                                    resultString.Append(text[i]);
+                                    Run run = new Run(resultString.ToString());
+                                    run.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f9f2f4"));
+                                    run.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#c7254e"));
+                                    paragraph.Inlines.Add(run);
+                                    resultString.Clear();
+                                    quotingIsActivated = false;
                                 }
                                 else
                                 {
-                                    Run run = new Run(text[i].ToString());
-                                    paragraph.Inlines.Add(run);
+                                    if (text[i] == '`')
+                                    {
+                                        quotingIsActivated = true;
+                                    }
+                                    else
+                                    {
+                                        if (italicIsActivated == true)
+                                        {
+                                            resultString.Append(text[i]);
+                                        }
+                                        else if (boldIsActivated == true)
+                                        {
+                                            resultString.Append(text[i]);
+                                        }
+                                        else if (quotingIsActivated == true)
+                                        {
+                                            resultString.Append(text[i]);
+                                        }
+                                        else
+                                        {
+                                            Run run = new Run(text[i].ToString());
+                                            paragraph.Inlines.Add(run);
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Markdown file(*.md)|*.md";
+            if (saveDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveDialog.FileName, MarkdownTextBox.Text);
+            }
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Markdown file(*.md)|*.md|All(*.*)|*";
+            if (openDialog.ShowDialog() == true)
+            {
+                string text = File.ReadAllText(openDialog.FileName);
+                MarkdownTextBox.Text = text;
             }
         }
     }
