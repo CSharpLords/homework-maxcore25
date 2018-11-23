@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Media;
 using Microsoft.Win32;
@@ -35,6 +36,9 @@ namespace Markdown2
 
             for (int i = 0; i < text.Length; i++)
             {
+                if (text[i] == '-')
+                {
+                }
                 if (boldIsActivated == true && text[i] == '*' && i != 0 && text[i - 1] == '*')
                 {
                     Bold bold = new Bold(new Run(resultString.ToString()));

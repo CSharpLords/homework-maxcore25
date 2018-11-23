@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="MarkdownTextBox" HorizontalAlignment="Left" Height="336" Margin="10,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" FontSize="18" TextChanged="MarkdownTextBox_TextChanged"/>
-        <RichTextBox x:Name="PreviewRichTextBox" HorizontalAlignment="Left" Height="336" VerticalAlignment="Top" Width="380" Margin="402,73,0,0" FontSize="18">
+        <TextBox x:Name="MarkdownTextBox" HorizontalAlignment="Left" Height="336" Margin="10,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" FontSize="18" TextChanged="MarkdownTextBox_TextChanged" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        <RichTextBox x:Name="PreviewRichTextBox" HorizontalAlignment="Left" Height="336" VerticalAlignment="Top" Width="380" Margin="402,73,0,0" FontSize="18" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <FlowDocument>
                 <Paragraph>
                     <Run Text=""/>
@@ -22,6 +22,5 @@
         <Button x:Name="OpenButton" Content="Open file" HorizontalAlignment="Left" Margin="611,10,0,0" VerticalAlignment="Top" Width="75" Click="OpenButton_Click"/>
         <Label x:Name="MarkdownLabel" Content="Markdown" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Label x:Name="PreviewLabel" Content="Preview" HorizontalAlignment="Left" Margin="402,41,0,0" VerticalAlignment="Top" FontSize="14"/>
-
     </Grid>
 </Window>
