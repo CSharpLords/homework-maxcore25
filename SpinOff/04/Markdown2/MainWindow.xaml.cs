@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,11 +22,6 @@ namespace Markdown2
 
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            StringBuilder resultString = new StringBuilder();
-            bool italicIsActivated = false;
-            bool boldIsActivated = false;
-            bool quotingIsActivated = false;
-
             FlowDocument flowDocument = new FlowDocument();
             Paragraph paragraph = new Paragraph();
             flowDocument.Blocks.Add(paragraph);
@@ -33,12 +29,46 @@ namespace Markdown2
 
             //string text = "**кот**u";
             string text = MarkdownTextBox.Text;
+            var paragrapshs = text.Split(new[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.None);
+            Console.WriteLine("---------");
+            foreach (var s in paragrapshs)
+            {
+                Console.WriteLine(s);
+                Console.WriteLine("||||||");
+            }
 
+            ProcessParagraph(paragraph, text);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Markdown file(*.md)|*.md";
+            if (saveDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveDialog.FileName, MarkdownTextBox.Text);
+            }
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Markdown file(*.md)|*.md|All(*.*)|*";
+            if (openDialog.ShowDialog() == true)
+            {
+                string text = File.ReadAllText(openDialog.FileName);
+                MarkdownTextBox.Text = text;
+            }
+        }
+
+        private void ProcessParagraph(Paragraph paragraph, string text)
+        {
+            StringBuilder resultString = new StringBuilder();
+            bool italicIsActivated = false;
+            bool boldIsActivated = false;
+            bool quotingIsActivated = false;
             for (int i = 0; i < text.Length; i++)
             {
-                if (text[i] == '-')
-                {
-                }
                 if (boldIsActivated == true && text[i] == '*' && i != 0 && text[i - 1] == '*')
                 {
                     Bold bold = new Bold(new Run(resultString.ToString()));
@@ -68,15 +98,16 @@ namespace Markdown2
                             if (text[i] == '*')
                             {
                                 italicIsActivated = true;
-
                             }
                             else // letters 
                             {
                                 if (quotingIsActivated == true && text[i] == '`')
                                 {
                                     Run run = new Run(resultString.ToString());
-                                    run.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f9f2f4"));
-                                    run.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#c7254e"));
+                                    run.Background =
+                                        new SolidColorBrush((Color) ColorConverter.ConvertFromString("#f9f2f4"));
+                                    run.Foreground =
+                                        new SolidColorBrush((Color) ColorConverter.ConvertFromString("#c7254e"));
                                     paragraph.Inlines.Add(run);
                                     resultString.Clear();
                                     quotingIsActivated = false;
@@ -112,27 +143,6 @@ namespace Markdown2
                         }
                     }
                 }
-            }
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "Markdown file(*.md)|*.md";
-            if (saveDialog.ShowDialog() == true)
-            {
-                File.WriteAllText(saveDialog.FileName, MarkdownTextBox.Text);
-            }
-        }
-
-        private void OpenButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "Markdown file(*.md)|*.md|All(*.*)|*";
-            if (openDialog.ShowDialog() == true)
-            {
-                string text = File.ReadAllText(openDialog.FileName);
-                MarkdownTextBox.Text = text;
             }
         }
     }
