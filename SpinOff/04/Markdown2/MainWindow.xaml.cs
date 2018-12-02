@@ -18,26 +18,12 @@ namespace Markdown2
         public MainWindow()
         {
             InitializeComponent();
+            WorkWithText("а**кот**u\n пошел в магазин");
         }
 
         private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FlowDocument flowDocument = new FlowDocument();
-            Paragraph paragraph = new Paragraph();
-            flowDocument.Blocks.Add(paragraph);
-            PreviewRichTextBox.Document = flowDocument;
-
-            //string text = "**кот**u";
-            string text = MarkdownTextBox.Text;
-            var paragrapshs = text.Split(new[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.None);
-            Console.WriteLine("---------");
-            foreach (var s in paragrapshs)
-            {
-                Console.WriteLine(s);
-                Console.WriteLine("||||||");
-            }
-
-            ProcessParagraph(paragraph, text);
+            WorkWithText(MarkdownTextBox.Text);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -77,73 +63,71 @@ namespace Markdown2
                     boldIsActivated = false;
                     italicIsActivated = false;
                 }
+                else if (text[i] == '*' && i != 0 && text[i - 1] == '*')
+                {
+                    boldIsActivated = true;
+                    italicIsActivated = false;
+                }
+                else if (italicIsActivated == true && text[i] == '*')
+                {
+                    Italic italic = new Italic(new Run(resultString.ToString()));
+                    paragraph.Inlines.Add(italic);
+                    resultString.Clear();
+                    italicIsActivated = false;
+                }
+                else if (text[i] == '*')
+                {
+                    italicIsActivated = true;
+                }
+                else if (quotingIsActivated == true && text[i] == '`')
+                {
+                    Run run = new Run(resultString.ToString());
+                    run.Background =
+                        new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f9f2f4"));
+                    run.Foreground =
+                        new SolidColorBrush((Color)ColorConverter.ConvertFromString("#c7254e"));
+                    paragraph.Inlines.Add(run);
+                    resultString.Clear();
+                    quotingIsActivated = false;
+                }
+                else if (text[i] == '`')
+                {
+                    quotingIsActivated = true;
+                }
+                else if (italicIsActivated == true)
+                {
+                    resultString.Append(text[i]);
+                }
+                else if (boldIsActivated == true)
+                {
+                    resultString.Append(text[i]);
+                }
+                else if (quotingIsActivated == true)
+                {
+                    resultString.Append(text[i]);
+                }
                 else
                 {
-                    if (text[i] == '*' && i != 0 && text[i - 1] == '*')
-                    {
-                        boldIsActivated = true;
-                        italicIsActivated = false;
-                    }
-                    else
-                    {
-                        if (italicIsActivated == true && text[i] == '*')
-                        {
-                            Italic italic = new Italic(new Run(resultString.ToString()));
-                            paragraph.Inlines.Add(italic);
-                            resultString.Clear();
-                            italicIsActivated = false;
-                        }
-                        else
-                        {
-                            if (text[i] == '*')
-                            {
-                                italicIsActivated = true;
-                            }
-                            else // letters 
-                            {
-                                if (quotingIsActivated == true && text[i] == '`')
-                                {
-                                    Run run = new Run(resultString.ToString());
-                                    run.Background =
-                                        new SolidColorBrush((Color) ColorConverter.ConvertFromString("#f9f2f4"));
-                                    run.Foreground =
-                                        new SolidColorBrush((Color) ColorConverter.ConvertFromString("#c7254e"));
-                                    paragraph.Inlines.Add(run);
-                                    resultString.Clear();
-                                    quotingIsActivated = false;
-                                }
-                                else
-                                {
-                                    if (text[i] == '`')
-                                    {
-                                        quotingIsActivated = true;
-                                    }
-                                    else
-                                    {
-                                        if (italicIsActivated == true)
-                                        {
-                                            resultString.Append(text[i]);
-                                        }
-                                        else if (boldIsActivated == true)
-                                        {
-                                            resultString.Append(text[i]);
-                                        }
-                                        else if (quotingIsActivated == true)
-                                        {
-                                            resultString.Append(text[i]);
-                                        }
-                                        else
-                                        {
-                                            Run run = new Run(text[i].ToString());
-                                            paragraph.Inlines.Add(run);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    Run run = new Run(text[i].ToString());
+                    paragraph.Inlines.Add(run);
                 }
             }
+        }
+
+        private void WorkWithText(string text)
+        {
+            FlowDocument flowDocument = new FlowDocument();
+            PreviewRichTextBox.Document = flowDocument;
+            string[] paragrapshs = text.Split('\n');
+            foreach (string segment in paragrapshs)
+            {
+                Paragraph paragraph = new Paragraph();
+                paragraph.Margin = new Thickness(0, 0, 0, 10);
+                ProcessParagraph(paragraph, segment);
+                flowDocument.Blocks.Add(paragraph);
+            }
+
+          
         }
     }
 }
