@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Digger
 {
@@ -20,13 +21,32 @@ namespace Digger
 
         public CreatureCommand Act(int x, int y)
         {
-            return new CreatureCommand();
+            CreatureCommand movement = new CreatureCommand();
+            
+            if (Game.KeyPressed == Keys.W || Game.KeyPressed == Keys.Up)
+            {
+                movement.DeltaY = -1;
+            }
+            if (Game.KeyPressed == Keys.S || Game.KeyPressed == Keys.Down)
+            {
+                movement.DeltaY = 1;
+            }
+            if (Game.KeyPressed == Keys.A || Game.KeyPressed == Keys.Left)
+            {
+                movement.DeltaX = -1;
+            }
+            if (Game.KeyPressed == Keys.D || Game.KeyPressed == Keys.Right)
+            {
+                movement.DeltaX = 1;
+            }
+            return movement;
         }
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
             return false;
         }
+
     }
 
     class Terrain : ICreature
@@ -55,5 +75,5 @@ namespace Digger
             return false;
         }
     }
-   
+
 }
