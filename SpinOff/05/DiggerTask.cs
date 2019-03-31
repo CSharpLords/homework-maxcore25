@@ -22,7 +22,7 @@ namespace Digger
         public CreatureCommand Act(int x, int y)
         {
             CreatureCommand movement = new CreatureCommand();
-            
+
             if (Game.KeyPressed == Keys.W || Game.KeyPressed == Keys.Up)
             {
                 movement.DeltaY = -1;
@@ -39,14 +39,38 @@ namespace Digger
             {
                 movement.DeltaX = 1;
             }
+            CheckBorders(x, y, movement);
+            ICreature creatureX = Game.Map[x + movement.DeltaX, y];
+            if (creatureX is Sack)
+            {
+                movement.DeltaX = 0;
+            }
+
+            ICreature creatureY = Game.Map[x, y + movement.DeltaY];
+            if (creatureY is Sack)
+            {
+                movement.DeltaY = 0;
+            }
             return movement;
+        }
+
+        public void CheckBorders(int x, int y, CreatureCommand movement)
+        {
+            if (x + movement.DeltaX == Game.MapWidth || x + movement.DeltaX == -1)
+            {
+                movement.DeltaX = 0;
+            }
+
+            if (y + movement.DeltaY == Game.MapHeight || y + movement.DeltaY == -1)
+            {
+                movement.DeltaY = 0;
+            }
         }
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
             return false;
         }
-
     }
 
     class Terrain : ICreature
@@ -75,5 +99,53 @@ namespace Digger
             return false;
         }
     }
+    class Sack : ICreature
+    {
+        public string GetImageFileName()
+        {
+            return "Sack.png";
+        }
 
+        public int GetDrawingPriority()
+        {
+            return 1;
+        }
+
+        public CreatureCommand Act(int x, int y)
+        {
+            return new CreatureCommand();
+        }
+
+        public bool DeadInConflict(ICreature conflictedObject)
+        {
+            return false;
+        }
+    }
+    class Gold : ICreature
+    {
+        public string GetImageFileName()
+        {
+            return "Gold.png";
+        }
+
+        public int GetDrawingPriority()
+        {
+            return 1;
+        }
+
+        public CreatureCommand Act(int x, int y)
+        {
+            return new CreatureCommand();
+        }
+
+        public bool DeadInConflict(ICreature conflictedObject)
+        {
+            if (conflictedObject is Player)
+            {
+                Game.Scores += 10;
+                return true;
+            }
+            return false;
+        }
+    }
 }
