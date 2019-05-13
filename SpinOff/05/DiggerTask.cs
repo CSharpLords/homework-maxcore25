@@ -27,22 +27,22 @@ namespace Digger
 
             if (Game.KeyPressed == Keys.W || Game.KeyPressed == Keys.Up)
             {
-                movement.DeltaY = -2;
+                movement.DeltaY = -1;
             }
 
             if (Game.KeyPressed == Keys.S || Game.KeyPressed == Keys.Down)
             {
-                movement.DeltaY = 2;
+                movement.DeltaY = 1;
             }
 
             if (Game.KeyPressed == Keys.A || Game.KeyPressed == Keys.Left)
             {
-                movement.DeltaX = -2;
+                movement.DeltaX = -1;
             }
 
             if (Game.KeyPressed == Keys.D || Game.KeyPressed == Keys.Right)
             {
-                movement.DeltaX = 2;
+                movement.DeltaX = 1;
             }
 
             CheckBorders(x, y, movement);
@@ -76,7 +76,7 @@ namespace Digger
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
-            if (conflictedObject is Sack)
+            if (conflictedObject is Sack || conflictedObject is Monster)
             {
                 return true;
             }
@@ -115,7 +115,7 @@ namespace Digger
 
     class Sack : ICreature
     {
-        private bool isMoving = false;
+        private bool isFalling = false;
         private int distance = 0;
 
         public string GetImageFileName()
@@ -133,7 +133,7 @@ namespace Digger
             CreatureCommand command = new CreatureCommand();
             if (Game.MapHeight - 1 != y && Game.Map[x, y + 1] == null)
             {
-                isMoving = true;
+                isFalling = true;
                 command.DeltaY = 1;
                 distance++;
             }
@@ -142,10 +142,15 @@ namespace Digger
                 command.TransformTo = new Gold();
             }
 
-            if (Game.MapHeight - 1 != y && isMoving == true && Game.Map[x, y + 1] is Player)
+            if (Game.MapHeight - 1 != y && isFalling == true && Game.Map[x, y + 1] is Player) //
             {
                 command.DeltaY = 1;
                 distance++;
+            }
+
+            if (distance == 1 && (Game.MapHeight - 1 == y || !(Game.Map[x, y + 1] is null) && !(Game.Map[x, y + 1] is Player)))
+            {
+                distance = 0;
             }
 
             return command;
@@ -181,6 +186,10 @@ namespace Digger
                 Game.Scores += 10;
                 return true;
             }
+            else if (conflictedObject is Monster)
+            {
+                return true;
+            }
 
             return false;
         }
@@ -200,38 +209,50 @@ namespace Digger
 
         public CreatureCommand Act(int x, int y)
         {
-            CreatureCommand command = new CreatureCommand();
+            CreatureCommand movement = new CreatureCommand();
             Point? playerPoint = FindPlayer();
             if (playerPoint != null)
             {
                 int distanceX = playerPoint.Value.X - x;
                 int distanceY = playerPoint.Value.Y - y;
+                
                 if (x == playerPoint.Value.X)
                 {
                     if (distanceY > 0)
                     {
-                        command.DeltaY = 1;
+                        movement.DeltaY = 1;
                     }
                     else
                     {
-                        command.DeltaY = -1;
+                        movement.DeltaY = -1;
                     }
                 }
                 else
                 {
                     if (distanceX > 0)
                     {
-                        command.DeltaX = 1;
+                        movement.DeltaX = 1;
                     }
                     else
                     {
-                        command.DeltaX = -1;
+                        movement.DeltaX = -1;
                     }
-                    
                 }
-                
+
+                ICreature creatureX = Game.Map[x + movement.DeltaX, y];
+                ICreature creatureY = Game.Map[x, y + movement.DeltaY];
+                if (creatureX is Sack || creatureX is Terrain || creatureX is Monster)
+                {
+                    movement.DeltaX = 0;
+                }
+
+                if (creatureY is Sack || creatureY is Terrain || creatureY is Monster)
+                {
+                    movement.DeltaY = 0;
+                }
             }
-            return command;
+
+            return movement;
         }
 
         private Point? FindPlayer() //nullable
@@ -252,6 +273,10 @@ namespace Digger
 
         public bool DeadInConflict(ICreature conflictedObject)
         {
+            if (conflictedObject is Gold || conflictedObject is Player)
+            {
+                return false;
+            }
 
             return true;
         }

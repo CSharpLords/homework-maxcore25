@@ -41,11 +41,11 @@ S TTST  TG
         private const string mapWithPlayerTerrainSackGoldMonster2 = @"
           
           
+        T 
+   P M T  
+        T 
+        T 
           
-          
- P        
-          
-        M 
           
           ";
 
