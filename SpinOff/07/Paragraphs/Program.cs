@@ -29,7 +29,7 @@ namespace Paragraphs {
 			rp.AddWord("stuv");
 			/* выведется
 			abc defg
-				  hi
+			      hi
 			jklmnopq
 			  r stuv
 			 */
