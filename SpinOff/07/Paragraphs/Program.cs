@@ -14,7 +14,7 @@ namespace Paragraphs {
 			lp.AddWord("stuv");
 			/* выведется
 			abc defg
-			hi
+			hi 
 			jklmnopq
 			r stuv
 			 */
